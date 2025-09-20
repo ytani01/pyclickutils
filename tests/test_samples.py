@@ -58,22 +58,14 @@ def pattern1(
 class TestSamples:
     """test sample programs"""
 
-    def test_sample1(self):
-        """sample1"""
-        pattern1(SAMPLE1_CMD, "", ["Hello, world!"], [])
-
-    def test_sample2(self):
-        """sample2"""
-        pattern1(
-            SAMPLE2_CMD, "", ["arg1", "arg_dummy", "opt1", "opt_dummy"], []
-        )
-
     @pytest.mark.parametrize(
         "sample_cmd, option, expected_stdout",
         [
+            (SAMPLE1_CMD, "", ["Hello, world!"]),
             (SAMPLE1_CMD, "help", [f"Usage: {SAMPLE1}"]),
             (SAMPLE1_CMD, "version", [f"{SAMPLE1} "]),
             (SAMPLE1_CMD, "debug", ["[DEBUG] "]),
+            (SAMPLE2_CMD, "", ["arg1", "arg_dummy", "opt1", "opt_dummy"]),
             (SAMPLE2_CMD, "help", [f"Usage: {SAMPLE2}", "Options:"]),
             (SAMPLE2_CMD, "version", [f"{SAMPLE2} "]),
             (SAMPLE2_CMD, "debug", ["arg1 =", "opt1 =", "[DEBUG] "]),
