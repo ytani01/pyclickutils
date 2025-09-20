@@ -2,7 +2,7 @@
 #  独自の引数やオプションを加えるサンプル
 #
 # `click.command()` と `@click_common_opts()` ではさむ
-# 
+#
 import click
 
 from pyclickutils import click_common_opts

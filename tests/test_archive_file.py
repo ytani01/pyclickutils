@@ -16,6 +16,7 @@ RESULT_OK = 0
 RESULT_FILE_NOTFOUND = 1
 RESULT_DIR_NOTFOUND = 2
 
+
 @pytest.fixture(autouse=True)
 def setup_and_teardown():
     # テスト前にアーカイブディレクトリをクリーンアップ
@@ -40,7 +41,8 @@ def test_archive_file_success():
     with open(TEST_FILE, "w") as f:
         f.write("This is a test file.\n")
 
-    cmdline = f"uv run archive_file.py --debug --dstdir {TEST_ARCHIVE_DIR} {TEST_FILE}"
+    cmdline = (f"uv run archive_file.py --debug --dstdir {TEST_ARCHIVE_DIR} "
+               f"{TEST_FILE}")
     print()
     print()
     print(f"* cmdline = {cmdline}")
@@ -55,8 +57,9 @@ def test_archive_file_success():
 
     assert result.returncode == RESULT_OK
 
-    assert f"Archived '{TEST_FILE}' to " \
-           f"'{TEST_ARCHIVE_DIR}/" in result.stdout
+    expected_output = (f"Archived '{TEST_FILE}' to "
+                       f"'{TEST_ARCHIVE_DIR}/")
+    assert expected_output in result.stdout
     assert not os.path.exists(TEST_FILE)  # 元のファイルは削除されているはず
 
     # アーカイブディレクトリにファイルが存在することを確認
@@ -100,7 +103,8 @@ def test_archive_file_set_status():
 
 
 def test_file_not_found():
-    cmdline = f"uv run archive_file.py --debug --dstdir {TEST_ARCHIVE_DIR} {TEST_FILE_NOTFOUND}"
+    cmdline = (f"uv run archive_file.py --debug --dstdir {TEST_ARCHIVE_DIR} "
+               f"{TEST_FILE_NOTFOUND}")
     print()
     print()
     print(f"* cmdline = {cmdline}")
@@ -122,7 +126,8 @@ def test_directory_not_found():
     with open(TEST_FILE, "w") as f:
         f.write("This is a test file.\n")
 
-    cmdline = f"uv run archive_file.py --debug --dstdir {TEST_DIR_NOTFOUND} {TEST_FILE}"
+    cmdline = (f"uv run archive_file.py --debug --dstdir {TEST_DIR_NOTFOUND} "
+               f"{TEST_FILE}")
     print()
     print()
     print(f"* cmdline = {cmdline}")

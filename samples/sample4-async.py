@@ -45,4 +45,4 @@ async def main(ctx, debug):
     print("all done.")
 
 if __name__ == "__main__":
-    main() # 普通に呼び出す。(async.. とか、awaitとか、不要)
+    main()  # 普通に呼び出す。(async.. とか、awaitとか、不要)

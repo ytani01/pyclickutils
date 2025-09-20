@@ -1,0 +1,1 @@
+  - [x] tests/test_samples.pyを精読して、リファクタリングする
