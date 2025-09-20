@@ -1,0 +1,32 @@
+[project]
+name = "pyclickutils"
+dynamic = ["version"]
+description = "utilities for `click`"
+readme = "README.md"
+authors = [
+    { name = "Yoichi Tanibayashi", email = "yoichi@tanibayashi.jp" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "asyncclick>=8.2.2.2",
+    "click>=8.2.1",
+]
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+
+[dependency-groups]
+dev = [
+    "flake8>=7.3.0",
+    "mypy>=1.18.1",
+    "pyright>=1.1.405",
+    "ruff>=0.13.0",
+    "pytest>=8.2.2",
+]
+
+[project.scripts]
+pyclickutils = "pyclickutils.__main__:cli"
