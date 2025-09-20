@@ -5,7 +5,7 @@ import datetime
 import os
 import sys
 
-from clickutils import click_common_opts, get_logger, import_click
+from pyclickutils import click_common_opts, get_logger, import_click
 
 
 click = import_click()
