@@ -1,1 +1,7 @@
   - [x] tests/test_samples.pyを精読して、リファクタリングする
+  - [x] tests/conftest.py, tests/test_00_*.py をリファクタリング
+  - [x] tests/conftest.pyに 'blassed'のようなキー入力もキャプチャしてテストできるように改造する計画を Plan.mdにまとめる。
+  - [x] Plan.mdを日本語に翻訳
+  - [x] pytestの機能、blassedの仕様を再調査して Plan.mdで修正すべき点があれば修正する
+  - [x] Plan.mdに従って、ステップ・バイ・ステップのタスクリストをTasks.mdに作成する。
+  - [x] Plan.mdと、tests/conftest.py, tests/test_interactive.pyを確認して齟齬がないか調査し、報告する。コードの修正はまだ行わない。
