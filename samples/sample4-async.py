@@ -2,6 +2,7 @@
 # 非同期のサンプル
 #
 import asyncio
+
 import asyncclick as click
 
 from pyclickutils import click_common_opts

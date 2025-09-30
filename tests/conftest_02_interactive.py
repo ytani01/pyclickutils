@@ -1,7 +1,9 @@
 # tests/test_interactive.py
 
 import os
+
 from tests.conftest import KEY_DOWN, KEY_ENTER
+
 
 def test_interactive_menu(cli_runner):
     # Create a dummy interactive app for testing
@@ -41,12 +43,13 @@ while True:
     print_menu()
 """
 
-
     # Write the dummy app to a temporary file
     with open("my_interactive_app.py", "w") as f:
         f.write(app_code)
 
-    session = cli_runner.run_interactive_command(["python", "my_interactive_app.py"])
+    session = cli_runner.run_interactive_command(
+        ["python", "my_interactive_app.py"]
+    )
 
     assert session.expect("> Menu Item 1")
     session.send_key(KEY_DOWN)

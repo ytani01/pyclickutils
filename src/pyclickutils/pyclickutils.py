@@ -1,23 +1,6 @@
 #
 # (c) 2025 Yoichi Tanibayashi
 #
-from . import __package__
-from .version import __version__
-
-
-def import_click(async_flag=False):
-    """Import asyncclick or click."""
-    # 重要: 下記、コメントの ``# type: ...`` は、mypy対策で必要
-    if async_flag:
-        import asyncclick as click  # type: ignore[import]
-    else:
-        import click  # type:ignore[no-redef]
-
-    return click
-
-
-click = import_click()
-
 
 def click_common_opts(
     click,
@@ -31,7 +14,7 @@ def click_common_opts(
         if len(ver_str) > 0:
             v_str = ver_str
         else:
-            v_str = f"_._._ ({__package__} {__version__})"
+            v_str = "_._._"
 
         # version option
         ver_opts = ["--version", "-V"]

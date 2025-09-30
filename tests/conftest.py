@@ -1,11 +1,12 @@
 # tests/conftest.py
-import pytest
-import subprocess
-import pty
 import os
+import pty
 import select
+import subprocess
 import time
 from typing import Optional
+
+import pytest
 
 
 class InteractiveSession:
@@ -27,7 +28,7 @@ class InteractiveSession:
                 try:
                     data = os.read(self.master_fd, 1024).decode()
                     self.output += data
-                    print(f"Current output: {self.output!r}") # Debug print
+                    print(f"Current output: {self.output!r}")  # Debug print
                     if pattern in self.output:
                         return True
                 except OSError:
@@ -105,7 +106,9 @@ class CLITestBase:
         except FileNotFoundError:
             pytest.skip(f"Command not found: {command[0]}")
 
-    def run_interactive_command(self, command: list[str]) -> "InteractiveSession":
+    def run_interactive_command(
+            self, command: list[str]
+    ) -> "InteractiveSession":
         master_fd, slave_fd = pty.openpty()
         process = subprocess.Popen(
             command,

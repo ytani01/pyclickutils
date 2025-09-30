@@ -2,6 +2,7 @@
 # (c) 2025 Yoichi Tanibayashi
 #
 import click
+
 from . import __version__, click_common_opts, get_logger
 
 
@@ -13,15 +14,13 @@ def cli(ctx, debug):
     __log = get_logger(__name__, debug)
     __log.debug("click = %a", click.__name__)
     __log.debug("command name = %a", ctx.command.name)
-    # __log.debug("ctx = %s", pprint.pformat(vars(ctx)))
-    # __log.debug("ctx = %s", pprint.pformat(vars(ctx)))
 
-    print(f"{ctx.command.name}")
+    click.echo(f"{ctx.command.name}")
 
     if ctx.invoked_subcommand:
         __log.debug("subcommand = %a", ctx.invoked_subcommand)
     else:
-        print(ctx.get_help())
+        click.echo(ctx.get_help())
 
 
 @cli.command()
@@ -31,7 +30,7 @@ def sub1(ctx, debug):
     __log = get_logger(__name__, debug)
     __log.debug("command name = %a", ctx.command.name)
 
-    print(f"  {ctx.command.name}")
+    click.echo(f"  {ctx.command.name}")
 
 
 @cli.group(invoke_without_command=True)
@@ -41,15 +40,13 @@ def sub2(ctx, debug):
 
     __log = get_logger(__name__, debug)
     __log.debug("command name = %a", ctx.command.name)
-    # __log.debug("ctx = %s", pprint.pformat(vars(ctx)))
-    # __log.debug("ctx = %s", pprint.pformat(vars(ctx)))
 
-    print(f"  {ctx.command.name}")
+    click.echo(f"  {ctx.command.name}")
 
     if ctx.invoked_subcommand:
         __log.debug("subcommand = %a", ctx.invoked_subcommand)
     else:
-        print(ctx.get_help())
+        click.echo(ctx.get_help())
 
 
 @sub2.command()
@@ -59,4 +56,4 @@ def sub2sub(ctx, debug):
     __log = get_logger(__name__, debug)
     __log.debug("command name = %a", ctx.command.name)
 
-    print(f"    {ctx.command.name}")
+    click.echo(f"    {ctx.command.name}")

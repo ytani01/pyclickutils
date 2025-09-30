@@ -156,6 +156,8 @@ source = { editable = "." }
 dependencies = [
     { name = "asyncclick" },
     { name = "click" },
+    { name = "types-click" },
+    { name = "typing" },
 ]
 
 [package.dev-dependencies]
@@ -171,6 +173,8 @@ dev = [
 requires-dist = [
     { name = "asyncclick", specifier = ">=8.2.2.2" },
     { name = "click", specifier = ">=8.2.1" },
+    { name = "types-click", specifier = ">=7.1.8" },
+    { name = "typing", specifier = ">=3.10.0.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -262,6 +266,24 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/46/09/dca8df3d48e8b3f4202bf20b1658898e74b6442ac835bfe2c1816d926697/ruff-0.13.0-py3-none-win32.whl", hash = "sha256:4e473e8f0e6a04e4113f2e1de12a5039579892329ecc49958424e5568ef4f768", size = 12141613, upload-time = "2025-09-10T16:25:28.664Z" },
     { url = "https://files.pythonhosted.org/packages/61/21/0647eb71ed99b888ad50e44d8ec65d7148babc0e242d531a499a0bbcda5f/ruff-0.13.0-py3-none-win_amd64.whl", hash = "sha256:48e5c25c7a3713eea9ce755995767f4dcd1b0b9599b638b12946e892123d1efb", size = 13258250, upload-time = "2025-09-10T16:25:31.773Z" },
     { url = "https://files.pythonhosted.org/packages/e1/a3/03216a6a86c706df54422612981fb0f9041dbb452c3401501d4a22b942c9/ruff-0.13.0-py3-none-win_arm64.whl", hash = "sha256:ab80525317b1e1d38614addec8ac954f1b3e662de9d59114ecbf771d00cf613e", size = 12312357, upload-time = "2025-09-10T16:25:35.595Z" },
+]
+
+[[package]]
+name = "types-click"
+version = "7.1.8"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/00/ff/0e6a56108d45c80c61cdd4743312d0304d8192482aea4cce96c554aaa90d/types-click-7.1.8.tar.gz", hash = "sha256:b6604968be6401dc516311ca50708a0a28baa7a0cb840efd7412f0dbbff4e092", size = 10015, upload-time = "2021-11-23T12:28:01.701Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ee/ad/607454a5f991c5b3e14693a7113926758f889138371058a5f72f567fa131/types_click-7.1.8-py3-none-any.whl", hash = "sha256:8cb030a669e2e927461be9827375f83c16b8178c365852c060a34e24871e7e81", size = 12929, upload-time = "2021-11-23T12:27:59.493Z" },
+]
+
+[[package]]
+name = "typing"
+version = "3.10.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/b0/1b/835d4431805939d2996f8772aca1d2313a57e8860fec0e48e8e7dfe3a477/typing-3.10.0.0.tar.gz", hash = "sha256:13b4ad211f54ddbf93e5901a9967b1e07720c1d1b78d596ac6a439641aa1b130", size = 78962, upload-time = "2021-05-01T18:03:58.186Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f2/5d/865e17349564eb1772688d8afc5e3081a5964c640d64d1d2880ebaed002d/typing-3.10.0.0-py3-none-any.whl", hash = "sha256:12fbdfbe7d6cca1a42e485229afcb0b0c8259258cfb919b8a5e2a5c953742f89", size = 26320, upload-time = "2021-05-01T18:03:56.398Z" },
 ]
 
 [[package]]

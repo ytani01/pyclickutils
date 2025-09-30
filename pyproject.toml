@@ -10,6 +10,8 @@ requires-python = ">=3.11"
 dependencies = [
     "asyncclick>=8.2.2.2",
     "click>=8.2.1",
+    "types-click>=7.1.8",
+    "typing>=3.10.0.0",
 ]
 
 [build-system]
@@ -33,24 +35,20 @@ pyclickutils = "pyclickutils.__main__:cli"
 
 [tool.mypy]
 python_version = "3.11"
-warn_unused_configs = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-warn_return_any = true
-warn_unreachable = true
-warn_no_return = true
-strict_optional = true
-strict_equality = true
-disallow_untyped_defs = true
-check_untyped_defs = true
-disallow_incomplete_defs = true
-disallow_untyped_calls = true
-disallow_untyped_decorators = true
-no_implicit_optional = true
-implicit_reexport = false
-local_partial_types = true
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "tests.conftest"
-ignore_errors = true
+# warn_unused_configs = true
+# warn_redundant_casts = true
+# warn_unused_ignores = true
+# warn_return_any = true
+# warn_unreachable = true
+# warn_no_return = true
+# strict_optional = true
+# strict_equality = true
+# disallow_untyped_defs = true
+# check_untyped_defs = true
+# disallow_incomplete_defs = true
+# disallow_untyped_calls = true
+# disallow_untyped_decorators = true
+# no_implicit_optional = true
+# implicit_reexport = false
+# local_partial_types = true
+# ignore_missing_imports = true

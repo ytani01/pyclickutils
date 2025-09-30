@@ -1,7 +1,7 @@
 import os
-import pytest
 import subprocess
 
+import pytest
 
 TEST_ARCHIVE_DIR = "test_archives"
 TEST_FILE_NAME = "test_file"

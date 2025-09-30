@@ -1,6 +1,6 @@
-import pytest
 import subprocess
 
+import pytest
 
 RESULT_OK = 0
 
@@ -15,7 +15,7 @@ SAMPLE1_CMD = f"{SAMPLE1}"
 SAMPLE2_CMD = f"{SAMPLE2} arg_dummy -o opt_dummy"
 
 
-def mkcmdline(cmd: str, opt: str = ""):
+def mkcmdline(cmd: str, opt: str = "") -> str:
     """make command line string."""
     cmdline = f"uv run {SAMPLES_DIR}/{cmd}"
     if opt:
