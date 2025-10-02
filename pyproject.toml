@@ -28,6 +28,7 @@ dev = [
     "pyright>=1.1.405",
     "ruff>=0.13.0",
     "pytest>=8.2.2",
+    "pyclickutils",
 ]
 
 [project.scripts]
@@ -40,6 +41,16 @@ exclude = ["test/data"]
 
 [tool.mypy]
 python_version = "3.11"
+
+[tool.uv.workspace]
+members = [
+    ".",
+    ".",
+    ".",
+]
+
+[tool.uv.sources]
+pyclickutils = { workspace = true, editable = true }
 # warn_unused_configs = true
 # warn_redundant_casts = true
 # warn_unused_ignores = true
