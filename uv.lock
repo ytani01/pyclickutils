@@ -164,7 +164,6 @@ dependencies = [
 dev = [
     { name = "flake8" },
     { name = "mypy" },
-    { name = "pyclickutils" },
     { name = "pyright" },
     { name = "pytest" },
     { name = "ruff" },
@@ -182,7 +181,6 @@ requires-dist = [
 dev = [
     { name = "flake8", specifier = ">=7.3.0" },
     { name = "mypy", specifier = ">=1.18.1" },
-    { name = "pyclickutils", editable = "." },
     { name = "pyright", specifier = ">=1.1.405" },
     { name = "pytest", specifier = ">=8.2.2" },
     { name = "ruff", specifier = ">=0.13.0" },
