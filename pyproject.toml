@@ -33,6 +33,11 @@ dev = [
 [project.scripts]
 pyclickutils = "pyclickutils.__main__:cli"
 
+[tool.ruff]
+line-length = 78
+target-version  = "py311"
+exclude = ["test/data"]
+
 [tool.mypy]
 python_version = "3.11"
 # warn_unused_configs = true

@@ -2,12 +2,16 @@
 # (c) 2025 Yoichi Tanibayashi
 #
 
+
 def click_common_opts(
     click,
     ver_str: str = "",
-    use_h: bool = True, use_d: bool = True, use_v: bool = False
+    use_h: bool = True,
+    use_d: bool = True,
+    use_v: bool = False,
 ):
     """共通オプションをまとめたメタデコレータ"""
+
     def _decorator(func):
         decorators = []
 

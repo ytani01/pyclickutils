@@ -31,7 +31,7 @@ def subsub(ctx, debug):
     if debug:
         print(f"[DEBUG] command.name =     '{ctx.command.name}'")
 
-    print("Hellow, world")
+    print("Hello, world")
 
 
 # ファイルを分ける場合は、以下のように登録する必要があります。

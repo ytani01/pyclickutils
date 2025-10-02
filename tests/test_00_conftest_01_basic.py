@@ -27,8 +27,8 @@ class TestAdvancedCommands:
     @pytest.mark.parametrize(
         "input_name, expected",
         [
-            ("World", "Hello World"),
-            ("Alice", "Hello Alice"),
+            ("World", ["Hello World", "Hello", "World"]),
+            ("Alice", ["Hello Alice"]),
         ],
     )
     def test_command_with_input(self, cli_runner, input_name, expected):
@@ -37,4 +37,5 @@ class TestAdvancedCommands:
             ["python3", "-c", "name = input(); print('Hello ' + name)"],
             input_data=input_name + "\n",
         )
-        cli_runner.assert_output_contains(result, stdout=expected)
+        for ex in expected:
+            cli_runner.assert_output_contains(result, stdout=ex)

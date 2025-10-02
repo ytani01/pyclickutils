@@ -2,32 +2,26 @@ import subprocess
 
 import pytest
 
-RESULT_OK = 0
-
 SAMPLES_DIR = "samples"
 
-SAMPLE1 = "sample1-simple.py"
-SAMPLE2 = "sample2-arg-opt.py"
-SAMPLE3 = "sample3-subs.py"
-SAMPLE4 = "sample4-async.py"
-
-SAMPLE1_CMD = f"{SAMPLE1}"
-SAMPLE2_CMD = f"{SAMPLE2} arg_dummy -o opt_dummy"
-
-
-def mkcmdline(cmd: str, opt: str = "") -> str:
-    """make command line string."""
-    cmdline = f"uv run {SAMPLES_DIR}/{cmd}"
-    if opt:
-        cmdline += f" --{opt}"
-    return cmdline
-
-
-def print_result(result):
-    """print result"""
-    print(f"* stdout\n'{result.stdout}'")
-    print(f"* stderr\n'{result.stderr}'")
-    print(f"* returncode = {result.returncode}\n")
+SAMPLE = [
+    "__dummy__",
+    "sample1-simple.py",
+    "sample2-arg-opt.py",
+    "sample3-subs.py",
+    "sample4-async.py",
+]
+SAMPLE_CMD = [
+    "__dummy__",
+    f"{SAMPLE[1]}",
+    f"{SAMPLE[2]} arg1 arg2 -o opt1",
+    [
+        f"{SAMPLE[3]}",
+        f"{SAMPLE[3]} sub",
+        f"{SAMPLE[3]} sub subsub",
+    ],
+    f"{SAMPLE[4]}",
+]
 
 
 @pytest.fixture(autouse=True)
@@ -35,42 +29,214 @@ def setup_and_teardown():
     yield
 
 
-def pattern1(
-    cmd: str, opt: str, result_stdout: list[str], result_stderr: list[str]
-):
-    """test pattern #1"""
-    cmdline = mkcmdline(cmd, opt)
-    print(f"\n* cmdline = {cmdline}")
-
-    result = subprocess.run(cmdline.split(), capture_output=True, text=True)
-
-    print_result(result)
-
-    assert result.returncode == RESULT_OK
-    if result_stdout:
-        for s in result_stdout:
-            assert s in result.stdout
-    if result_stderr:
-        for s in result_stderr:
-            assert s in result.stdout
-
-
 class TestSamples:
     """test sample programs"""
-
     @pytest.mark.parametrize(
-        "sample_cmd, option, expected_stdout",
+        "cmd, opt, expected_stdout, expected_stderr, returncode",
         [
-            (SAMPLE1_CMD, "", ["Hello, world!"]),
-            (SAMPLE1_CMD, "help", [f"Usage: {SAMPLE1}"]),
-            (SAMPLE1_CMD, "version", [f"{SAMPLE1} "]),
-            (SAMPLE1_CMD, "debug", ["[DEBUG] "]),
-            (SAMPLE2_CMD, "", ["arg1", "arg_dummy", "opt1", "opt_dummy"]),
-            (SAMPLE2_CMD, "help", [f"Usage: {SAMPLE2}", "Options:"]),
-            (SAMPLE2_CMD, "version", [f"{SAMPLE2} "]),
-            (SAMPLE2_CMD, "debug", ["arg1 =", "opt1 =", "[DEBUG] "]),
+            (
+                SAMPLE_CMD[1], "",
+                [
+                    "Hello, world!"
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[1], "help",
+                [
+                    f"Usage: {SAMPLE[1]}",
+                    "Options"
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[1], "h",
+                [
+                    f"Usage: {SAMPLE[1]}",
+                    "Options"
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[1], "version",
+                [
+                    f"{SAMPLE[1]} "
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[1], "V",
+                [
+                    f"{SAMPLE[1]} "
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[1], "debug",
+                [
+                    "[DEBUG] ",
+                    "command.name",
+                    "main"
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[1], "d",
+                [
+                    "[DEBUG] ",
+                    "command.name",
+                    "main"
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[2], "",
+                [
+                    "arg1",
+                    "arg2",
+                    "opt1"
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[2], "help",
+                [
+                    f"Usage: {SAMPLE[2]}",
+                    "Options:"
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[2], "version",
+                [
+                    f"{SAMPLE[2]} "
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[2], "debug",
+                [
+                    "arg1 =",
+                    "opt1 =",
+                    "[DEBUG] "
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[3][0], "",
+                [],
+                [
+                    f"Usage: {SAMPLE[3]}",
+                    "Options:",
+                    "Commands:",
+                    "sub"
+                ],
+                2
+            ),
+            (
+                SAMPLE_CMD[3][0], "V",
+                [
+                    f"{SAMPLE[3]} ",
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[3][0], "d",
+                [],
+                [
+                    f"Usage: {SAMPLE[3]} ",
+                    "Error: Missing command."
+                ],
+                2
+            ),
+            (
+                SAMPLE_CMD[3][1], "",
+                [],
+                [
+                    f"Usage: {SAMPLE[3]}",
+                    "Options:",
+                    "Commands:",
+                    "sub"
+                ],
+                2
+            ),
+            (
+                SAMPLE_CMD[3][1], "V",
+                [
+                    f"{SAMPLE[3]} ",
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[3][2], "",
+                [
+                    "Hello, world"
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[4], "",
+                [
+                    "call async functions",
+                    "func1 start",
+                    "func2 start",
+                    "func3 start",
+                    "func1 done",
+                    "func2 done",
+                    "func3 done",
+                    "all done"
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[4], "h",
+                [
+                    "Usage: ",
+                    "Options:",
+                ],
+                [],
+                0
+            ),
         ],
     )
-    def test_common_options(self, sample_cmd, option, expected_stdout):
+    def test_common_options(
+            self, cmd, opt, expected_stdout, expected_stderr, returncode
+    ):
         """test common options"""
-        pattern1(sample_cmd, option, expected_stdout, [])
+        # make cmdline
+        cmdline = f"uv run {SAMPLES_DIR}/{cmd}"
+        if len(opt) >= 2:
+            cmdline += f" --{opt}"
+        elif len(opt) == 1:
+            cmdline += f" -{opt}"
+        print(f"\n\n# cmdline = {cmdline}")
+
+        # run command
+        result = subprocess.run(cmdline.split(), capture_output=True, text=True)
+        print(f"## returncode> {result.returncode} == {returncode}")
+        assert result.returncode == returncode
+
+        print(f"## stdout\n{result.stdout.rstrip()}")
+        for s in expected_stdout:
+            print(f"### expecte:{s!r}")
+            assert s in result.stdout
+
+        print(f"## stderr\n{result.stderr.rstrip()}")
+        for s in expected_stderr:
+            print(f"### expecte:{s!r}")
+            assert s in result.stderr
