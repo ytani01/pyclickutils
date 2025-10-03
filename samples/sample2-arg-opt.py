@@ -11,7 +11,7 @@ from pyclickutils import click_common_opts
 @click.command()
 @click.argument("arg1", nargs=-1)
 @click.option("--opt1", "-o", type=str)
-@click_common_opts(click, ver_str="0.0.2")
+@click_common_opts("0.0.2")
 def main(ctx, arg1, opt1, debug):
     if debug:
         print(f"[DEBUG] click = '{click.__name__}'")

@@ -1,10 +1,10 @@
 #
 # (c) 2025 Yoichi Tanibayashi
 #
+import click
 
 
 def click_common_opts(
-    click,
     ver_str: str = "",
     use_h: bool = True,
     use_d: bool = True,

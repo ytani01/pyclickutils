@@ -7,10 +7,7 @@ Usage:
   class AAA:
       def __init__(self, debug_flag):
           #
-          # **重要**
-          #
-          #   継承時にoverrideされないように、
-          #   '__'をつける
+          #   継承時にoverrideされないように、'__'をつける
           #
           self.__log = get_logger(__class__.__name__, debug=debug_flag)
           self.__log.debug("....")
@@ -26,9 +23,7 @@ from logging import DEBUG, INFO, Formatter, StreamHandler, getLogger
 
 
 def get_logger(name, debug=False):
-    """
-    get logger
-    """
+    """Get logger."""
     filename = inspect.stack()[1].filename.split("/")[-1]
     name = filename + "." + name
     logger = getLogger(name)
@@ -50,12 +45,9 @@ def get_logger(name, debug=False):
 
     console_handler = StreamHandler()
     console_handler.setFormatter(handler_fmt)
-    console_handler.setLevel(
-        DEBUG
-    )  # Set handler level to DEBUG to allow all messages through
+    console_handler.setLevel(DEBUG)
 
     logger.addHandler(console_handler)
-
     logger.setLevel(INFO)  # Default logger level
 
     # [Important !! ]
@@ -72,3 +64,11 @@ def get_logger(name, debug=False):
         return logger
 
     raise ValueError("invalid `debug` value: %s" % (debug))
+
+
+def errmsg(e) -> str:
+    """Make stantdard error message."""
+    e_name = type(e).__name__
+    if type(e).__module__ != "builtins":
+        e_name = f"{type(e).__module__}.{e_name}"
+    return f"{e_name}: {e}"

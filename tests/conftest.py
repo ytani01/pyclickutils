@@ -21,6 +21,7 @@ class InteractiveSession:
 
     def expect(self, pattern: str, timeout: int = 5) -> bool:
         """Waits for a pattern to appear in the output."""
+        print()
         start_time = time.time()
         while time.time() - start_time < timeout:
             r, _, _ = select.select([self.master_fd], [], [], 0.1)
@@ -28,7 +29,7 @@ class InteractiveSession:
                 try:
                     data = os.read(self.master_fd, 1024).decode()
                     self.output += data
-                    print(f"Current output: {self.output!r}")  # Debug print
+                    print(f"Current output: \n{self.output}")  # Debug print
                     if pattern in self.output:
                         return True
                 except OSError:
