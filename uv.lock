@@ -17,18 +17,6 @@ wheels = [
 ]
 
 [[package]]
-name = "asyncclick"
-version = "8.3.0.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/a5/c5/9ca68d069991af1c8c9354deff9c2a2dd65ccae9fc2d7c9df1c07267a0e3/asyncclick-8.3.0.2.tar.gz", hash = "sha256:6430cb8df71c6d690db7a176d73382491a50110c848218f6ed4bc562893e004b", size = 288546, upload-time = "2025-10-02T19:15:34.344Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/24/b5/da3120d649157fe8f0d03d7e02f8f52c00b30758c1285e0a5d0d64cd4804/asyncclick-8.3.0.2-py3-none-any.whl", hash = "sha256:7e339c5495bbd2c1d8e7965888f2935afcb0f0e116c130ac8e0fa9f61bf173b6", size = 109719, upload-time = "2025-10-02T19:15:32.672Z" },
-]
-
-[[package]]
 name = "asyncio"
 version = "4.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -187,7 +175,6 @@ name = "pyclickutils"
 source = { editable = "." }
 dependencies = [
     { name = "anyio" },
-    { name = "asyncclick" },
     { name = "asyncio" },
     { name = "click" },
     { name = "types-click" },
@@ -206,7 +193,6 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "anyio", specifier = ">=4.11.0" },
-    { name = "asyncclick", specifier = ">=8.3.0.2" },
     { name = "asyncio", specifier = ">=4.0.0" },
     { name = "click", specifier = ">=8.2.1" },
     { name = "types-click", specifier = ">=7.1.8" },

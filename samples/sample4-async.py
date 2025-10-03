@@ -29,9 +29,15 @@ async def func3():
     print("    func3 done.")
 
 
-@click.command()
+@click.group()
 @click_common_opts(click, "0.0.1")
 async def main(ctx, debug):
+    pass
+
+
+@main.command()
+@click_common_opts(click, "0.0.1")
+async def sub(ctx, debug):
     """非同期main."""
     if debug:
         print(f"[DEBUG] click        = '{click.__name__}'")
@@ -44,6 +50,7 @@ async def main(ctx, debug):
         func3()
     )
     print("all done.")
+
 
 if __name__ == "__main__":
     main()  # 普通に呼び出す。(async.. とか、awaitとか、不要)
