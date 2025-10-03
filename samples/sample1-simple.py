@@ -15,7 +15,7 @@ from pyclickutils import click_common_opts
 
 
 @click.command()
-@click_common_opts(click, "0.0.1")
+@click_common_opts("0.0.1")
 def main(ctx, debug):
     if debug:
         print(f"[DEBUG] command.name = '{ctx.command.name}'")

@@ -191,14 +191,14 @@ class TestSamples:
             (
                 SAMPLE_CMD[4], "",
                 [
-                    "call async functions",
+                    "call async",
                     "func1 start",
                     "func2 start",
                     "func3 start",
                     "func1 done",
                     "func2 done",
                     "func3 done",
-                    "all done"
+                    "done"
                 ],
                 [],
                 0
@@ -208,6 +208,15 @@ class TestSamples:
                 [
                     "Usage: ",
                     "Options:",
+                ],
+                [],
+                0
+            ),
+            (
+                SAMPLE_CMD[4], "d",
+                [
+                    "[DEBUG] ",
+                    "done",
                 ],
                 [],
                 0

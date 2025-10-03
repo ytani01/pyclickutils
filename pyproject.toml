@@ -8,8 +8,6 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "anyio>=4.11.0",
-    "asyncio>=4.0.0",
     "click>=8.2.1",
     "types-click>=7.1.8",
     "typing>=3.10.0.0",
@@ -29,6 +27,7 @@ dev = [
     "pyright>=1.1.405",
     "ruff>=0.13.0",
     "pytest>=8.2.2",
+    "asyncio>=4.0.0",
 ]
 
 [project.scripts]
@@ -38,6 +37,3 @@ pyclickutils = "pyclickutils.__main__:cli"
 line-length = 78
 target-version  = "py311"
 exclude = ["test/data"]
-
-[tool.mypy]
-python_version = "3.11"
