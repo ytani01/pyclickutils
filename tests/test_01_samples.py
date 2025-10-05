@@ -36,32 +36,24 @@ class TestSamples:
         [
             (
                 SAMPLE_CMD[1], "",
-                [
-                    "Hello, world!"
-                ],
+                ["Hello, world!"],
                 [],
                 0
             ),
             (
-                SAMPLE_CMD[1], "help",
-                [
-                    f"Usage: {SAMPLE[1]}",
-                    "Options"
-                ],
+                SAMPLE_CMD[1], "--help",
+                [f"Usage: {SAMPLE[1]}", "Options"],
                 [],
                 0
             ),
             (
-                SAMPLE_CMD[1], "h",
-                [
-                    f"Usage: {SAMPLE[1]}",
-                    "Options"
-                ],
+                SAMPLE_CMD[1], "-h",
+                [f"Usage: {SAMPLE[1]}", "Options"],
                 [],
                 0
             ),
             (
-                SAMPLE_CMD[1], "version",
+                SAMPLE_CMD[1], "--version",
                 [
                     f"{SAMPLE[1]} "
                 ],
@@ -69,67 +61,44 @@ class TestSamples:
                 0
             ),
             (
-                SAMPLE_CMD[1], "V",
-                [
-                    f"{SAMPLE[1]} "
-                ],
+                SAMPLE_CMD[1], "-V",
+                [f"{SAMPLE[1]} "],
                 [],
                 0
             ),
             (
-                SAMPLE_CMD[1], "debug",
-                [
-                    "[DEBUG] ",
-                    "command.name",
-                    "main"
-                ],
+                SAMPLE_CMD[1], "--debug",
+                ["[DEBUG] ", "command.name", "main"],
                 [],
                 0
             ),
             (
-                SAMPLE_CMD[1], "d",
-                [
-                    "[DEBUG] ",
-                    "command.name",
-                    "main"
-                ],
+                SAMPLE_CMD[1], "-d",
+                ["[DEBUG] ", "command.name", "main"],
                 [],
                 0
             ),
             (
                 SAMPLE_CMD[2], "",
-                [
-                    "arg1",
-                    "arg2",
-                    "opt1"
-                ],
+                ["arg1", "arg2", "opt1"],
                 [],
                 0
             ),
             (
-                SAMPLE_CMD[2], "help",
-                [
-                    f"Usage: {SAMPLE[2]}",
-                    "Options:"
-                ],
+                SAMPLE_CMD[2], "--help",
+                [f"Usage: {SAMPLE[2]}", "Options:"],
                 [],
                 0
             ),
             (
-                SAMPLE_CMD[2], "version",
-                [
-                    f"{SAMPLE[2]} "
-                ],
+                SAMPLE_CMD[2], "--version",
+                [f"{SAMPLE[2]} "],
                 [],
                 0
             ),
             (
-                SAMPLE_CMD[2], "debug",
-                [
-                    "arg1 =",
-                    "opt1 =",
-                    "[DEBUG] "
-                ],
+                SAMPLE_CMD[2], "--debug",
+                ["arg1 =", "opt1 =", "[DEBUG] "],
                 [],
                 0
             ),
@@ -145,20 +114,15 @@ class TestSamples:
                 2
             ),
             (
-                SAMPLE_CMD[3][0], "V",
-                [
-                    f"{SAMPLE[3]} ",
-                ],
+                SAMPLE_CMD[3][0], "-V",
+                [f"{SAMPLE[3]} "],
                 [],
                 0
             ),
             (
-                SAMPLE_CMD[3][0], "d",
+                SAMPLE_CMD[3][0], "-d",
                 [],
-                [
-                    f"Usage: {SAMPLE[3]} ",
-                    "Error: Missing command."
-                ],
+                [f"Usage: {SAMPLE[3]} ", "Error: Missing command."],
                 2
             ),
             (
@@ -173,18 +137,14 @@ class TestSamples:
                 2
             ),
             (
-                SAMPLE_CMD[3][1], "V",
-                [
-                    f"{SAMPLE[3]} ",
-                ],
+                SAMPLE_CMD[3][1], "-V",
+                [f"{SAMPLE[3]} "],
                 [],
                 0
             ),
             (
                 SAMPLE_CMD[3][2], "",
-                [
-                    "Hello, world"
-                ],
+                ["Hello, world"],
                 [],
                 0
             ),
@@ -204,48 +164,27 @@ class TestSamples:
                 0
             ),
             (
-                SAMPLE_CMD[4], "h",
-                [
-                    "Usage: ",
-                    "Options:",
-                ],
+                SAMPLE_CMD[4], "-h",
+                ["Usage: ", "Options:"],
                 [],
                 0
             ),
             (
-                SAMPLE_CMD[4], "d",
-                [
-                    "[DEBUG] ",
-                    "done",
-                ],
+                SAMPLE_CMD[4], "-d",
+                ["[DEBUG] ", "done",],
                 [],
                 0
             ),
         ],
     )
     def test_common_options(
-            self, cmd, opt, expected_stdout, expected_stderr, returncode
+            self, cli_runner, cmd, opt, expected_stdout, expected_stderr, returncode
     ):
         """test common options"""
-        # make cmdline
         cmdline = f"uv run {SAMPLES_DIR}/{cmd}"
-        if len(opt) >= 2:
-            cmdline += f" --{opt}"
-        elif len(opt) == 1:
-            cmdline += f" -{opt}"
-        print(f"\n\n# cmdline = {cmdline}")
-
-        # run command
-        result = subprocess.run(cmdline.split(), capture_output=True, text=True)
-        print(f"## returncode> {result.returncode} == {returncode}")
-        assert result.returncode == returncode
-
-        print(f"## stdout\n{result.stdout.rstrip()}")
-        for s in expected_stdout:
-            print(f"### expecte:{s!r}")
-            assert s in result.stdout
-
-        print(f"## stderr\n{result.stderr.rstrip()}")
-        for s in expected_stderr:
-            print(f"### expecte:{s!r}")
-            assert s in result.stderr
+        cli_runner.test_command(
+            cmdline, opt,
+            e_stdout=expected_stdout,
+            e_stderr=expected_stderr,
+            e_ret=returncode
+        )
