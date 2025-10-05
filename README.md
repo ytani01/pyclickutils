@@ -88,12 +88,6 @@ uv add ../pyclickutils  # 相対パスで本パッケージを`uv add`する。
 
 その他のサンプルは、[samples](samples/) ディレクトリを参照してください。
 
-※ **注意**
-※ 同期/非同期に合わせて以下のインポートを適切に選んでください。
-※   import click
-※     or
-※   import asyncclick as click
-
 ```python
 import click
 
@@ -105,7 +99,7 @@ VERSION = "1.0.0"
 
 # CLI のトップレベルコマンドを定義
 @click.group(invoke_without_command=True)
-@click_common_opts(click, VERSION)
+@click_common_opts(VERSION)
 def cli(ctx, debug):
     """CLI top."""
     if debug:
@@ -124,7 +118,7 @@ def cli(ctx, debug):
 @cli.command()
 @click.argument("arg1", type=str, nargs=1)
 @click.options("--opt1", type=str, default="")
-@click_common_opts(click, VERSION)
+@click_common_opts(VERSION)
 def sub1(ctx, arg1, opt1, debug):
     """Subcommand #1."""
     if debug:
@@ -138,10 +132,6 @@ if __name__ == '__main__':
 
 
 #### ==== パラメータ
-
-- `click` (必須)
-
-   インポートした`click`パッケージを明示的に指定する必要があります。
 
 - `ver_str` (str, 省略可)
 
