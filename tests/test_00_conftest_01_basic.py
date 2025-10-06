@@ -6,7 +6,8 @@
 #
 import pytest
 
-KEY_EOF='\x04'
+KEY_EOF = "\x04"
+
 
 class TestBasicCommands:
     """基本的なコマンドのテスト。"""

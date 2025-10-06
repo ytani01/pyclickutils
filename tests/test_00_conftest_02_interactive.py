@@ -1,4 +1,3 @@
-# tests/test_interactive.py
 import os
 
 import pytest
